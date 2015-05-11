@@ -1,0 +1,2287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Liblouis Table Specification</title>
+<!-- 2015-05-11 Mon 18:39 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Bert Frees" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script src="script.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Liblouis Table Specification</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Opcodes</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-space" class="outline-3">
+<h3 id="space"><a id="sec-1-1" name="sec-1-1"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-space"><code>space</code></a></h3>
+<div class="outline-text-3" id="text-space">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as "space"
+<ul class="org-ul">
+<li>for using <code>$s</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+<li>for finding word boundaries (<a href="#largesign"><code>largesign</code></a>, <a href="#joinword"><code>joinword</code></a>,
+       <a href="#joinnum"><code>joinnum</code></a>, <a href="#contraction"><code>contraction</code></a>, <a href="#lowword"><code>lowword</code></a>, <a href="#sufword"><code>sufword</code></a>, <a href="#prfword"><code>prfword</code></a>,
+       <a href="#begword"><code>begword</code></a>, <a href="#begmidword"><code>begmidword</code></a>, <a href="#midendword"><code>midendword</code></a>, <a href="#endword"><code>endword</code></a>, <a href="#prepunc"><code>prepunc</code></a>,
+       <a href="#postpunc"><code>postpunc</code></a>, <i><code>firstwordital</code></i>, <i><code>firstwordbold</code></i>, <i><code>firstwordunder</code></i>,
+       <i><code>lastworditalbefore</code></i>, <i><code>lastwordboldbefore</code></i>,
+       <i><code>lastwordunderbefore</code></i>, <i><code>lastworditalafter</code></i>,
+       <i><code>lastwordboldafter</code></i>, <i><code>lastwordunderafter</code></i>)
+</li>
+<li>for finding number boundaries (<a href="#begnum"><code>begnum</code></a>)
+</li>
+<li>for dropping space (<a href="#largesign"><code>largesign</code></a>, <a href="#joinnum"><code>joinnum</code></a>, <a href="#joinword"><code>joinword</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-punctuation" class="outline-3">
+<h3 id="punctuation"><a id="sec-1-2" name="sec-1-2"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-punctuation"><code>punctuation</code></a></h3>
+<div class="outline-text-3" id="text-punctuation">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as "punctuation mark"
+<ul class="org-ul">
+<li>for using <code>$p</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+<li>for finding punctuation (<a href="#prepunc"><code>prepunc</code></a>, <a href="#postpunc"><code>postpunc</code></a>)
+</li>
+<li>for finding word boundaries (<a href="#largesign"><code>largesign</code></a>, <a href="#joinword"><code>joinword</code></a>,
+       <a href="#joinnum"><code>joinnum</code></a>, <a href="#contraction"><code>contraction</code></a>, <a href="#sufword"><code>sufword</code></a>, <a href="#prfword"><code>prfword</code></a>, <a href="#begword"><code>begword</code></a>,
+       <a href="#begmidword"><code>begmidword</code></a>, <a href="#midendword"><code>midendword</code></a>, <a href="#endword"><code>endword</code></a>)
+</li>
+<li>for finding number boundaries (<a href="#begnum"><code>begnum</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-digit" class="outline-3">
+<h3 id="digit"><a id="sec-1-3" name="sec-1-3"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-digit"><code>digit</code></a></h3>
+<div class="outline-text-3" id="text-digit">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as "digit"
+<ul class="org-ul">
+<li>for using <code>$d</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+<li>for finding (the absense of) word boundaries (<a href="#prepunc"><code>prepunc</code></a>,
+       <a href="#postpunc"><code>postpunc</code></a>, <i><code>firstwordital</code></i>, <i><code>firstwordbold</code></i>, <i><code>firstwordunder</code></i>,
+       <i><code>lastworditalbefore</code></i>, <i><code>lastwordboldbefore</code></i>,
+       <i><code>lastwordunderbefore</code></i>, <i><code>lastworditalafter</code></i>,
+       <i><code>lastwordboldafter</code></i>, <i><code>lastwordunderafter</code></i>)
+</li>
+<li>for finding (the absense of) number boundaries (<a href="#numsign"><code>numsign</code></a>,
+       <a href="#begnum"><code>begnum</code></a>, <a href="#midnum"><code>midnum</code></a>, <a href="#endnum"><code>endnum</code></a>, <a href="#decpoint"><code>decpoint</code></a>)
+</li>
+<li>for finding one-letter words and letters following a digit (<a href="#letsign"><code>letsign</code></a>)
+</li>
+<li>for joining a word and a digit (<a href="#joinnum"><code>joinnum</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-letter" class="outline-3">
+<h3 id="letter"><a id="sec-1-4" name="sec-1-4"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-letter"><code>letter</code></a></h3>
+<div class="outline-text-3" id="text-letter">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as "letter"
+<ul class="org-ul">
+<li>for using <code>$l</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+<li>for finding (the absense of) word boundaries (<a href="#repword"><code>repword</code></a>,
+       <a href="#largesign"><code>largesign</code></a>, <a href="#partword"><code>partword</code></a>, <a href="#sufword"><code>sufword</code></a>, <a href="#prfword"><code>prfword</code></a>, <a href="#begword"><code>begword</code></a>,
+       <a href="#begmidword"><code>begmidword</code></a>, <a href="#midendword"><code>midendword</code></a>, <a href="#endword"><code>endword</code></a>, <a href="#prepunc"><code>prepunc</code></a>, <a href="#postpunc"><code>postpunc</code></a>,
+       <i><code>singleletterital</code></i>, <i><code>singleletterbold</code></i>, <i><code>singleletterunder</code></i>,
+       <i><code>firstletterital</code></i>, <i><code>firstletterbold</code></i>, <i><code>firstletterunder</code></i>,
+       <i><code>lastletterital</code></i>, <i><code>lastletterbold</code></i>, <i><code>lastletterunder</code></i>,
+       <i><code>firstwordital</code></i>, <i><code>firstwordbold</code></i>, <i><code>firstwordunder</code></i>,
+       <i><code>lastworditalbefore</code></i>, <i><code>lastwordboldbefore</code></i>,
+       <i><code>lastwordunderbefore</code></i>, <i><code>lastworditalafter</code></i>,
+       <i><code>lastwordboldafter</code></i>, <i><code>lastwordunderafter</code></i>)
+</li>
+<li>for finding one-letter words and letters following a digit (<a href="#letsign"><code>letsign</code></a>)
+</li>
+<li>for joining a word and a letter (<a href="#joinword"><code>joinword</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-lowercase" class="outline-3">
+<h3 id="lowercase"><a id="sec-1-5" name="sec-1-5"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-lowercase"><code>lowercase</code></a></h3>
+<div class="outline-text-3" id="text-lowercase">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as both "letter" and "lowercase"
+<ul class="org-ul">
+<li>for using <code>$u</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+<li>for finding the end of a block of uppercase letters within a word (<a href="#endcaps"><code>endcaps</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-uppercase" class="outline-3">
+<h3 id="uppercase"><a id="sec-1-6" name="sec-1-6"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-uppercase"><code>uppercase</code></a></h3>
+<div class="outline-text-3" id="text-uppercase">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as both "letter" and "uppercase"
+<ul class="org-ul">
+<li>for using <code>$U</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+<li>for inserting capital signs (<a href="#capsign"><code>capsign</code></a>, <a href="#begcaps"><code>begcaps</code></a>, <a href="#endcaps"><code>endcaps</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-uplow" class="outline-3">
+<h3 id="uplow"><a id="sec-1-7" name="sec-1-7"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-uplow"><code>uplow</code></a></h3>
+<div class="outline-text-3" id="text-uplow">
+<ul class="org-ul">
+<li><b>associates</b> first <i>character</i> with first <i>dots</i> (<a href="#uppercase"><code>uppercase</code></a>)
+</li>
+<li><b>defines</b> first <i>character</i> and first <i>dots</i> as "uppercase letter" (<a href="#uppercase"><code>uppercase</code></a>)
+</li>
+<li><b>associates</b> second <i>character</i> with last <i>dots</i> (<a href="#lowercase"><code>lowercase</code></a>)
+</li>
+<li><b>defines</b> second <i>character</i> and last <i>dots</i> as "lowercase letter" (<a href="#lowercase"><code>lowercase</code></a>)
+</li>
+<li><b>associates</b> letters as each other's case-counterparts
+<ul class="org-ul">
+<li>for mapping uppercase <i>character</i> to lowercase <i>dots</i>
+when prefixed with a capital sign (<a href="#capsign"><code>capsign</code></a>)
+</li>
+<li>for matching translation rules written in lowercase letters on
+input strings containing uppercase letters
+</li>
+</ul>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">lowercase</span> <span class="org-string">f</span> <span class="org-constant">124</span>
+<span class="org-keyword">uppercase</span> <span class="org-string">F</span> <span class="org-constant">1247</span>
+<span class="org-keyword">uplow</span> <span class="org-string">Oo</span> <span class="org-constant">1357,135</span>
+<span class="org-keyword">letter</span> <span class="org-string">u</span> <span class="org-constant">136</span>
+<span class="org-keyword">always</span> <span class="org-string">foo</span> <span class="org-constant">124-136</span>
+<span class="org-keyword">always</span> <span class="org-string">OOf</span> <span class="org-constant">136-1247</span> <span class="org-comment"># translation rules with uppercase letters</span>
+                    <span class="org-comment"># defined with uplow don't work</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"FOO"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"FOO"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"fOO"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"OOf"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"OOf"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L352"><code>lou_translateString.c::352</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L695"><code>lou_translateString.c::695</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1277"><code>lou_translateString.c::1277</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1572"><code>lou_translateString.c::1572</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1918"><code>lou_translateString.c::1918</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-litdigit" class="outline-3">
+<h3 id="litdigit"><a id="sec-1-8" name="sec-1-8"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-litdigit"><code>litdigit</code></a></h3>
+<div class="outline-text-3" id="text-litdigit">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>has precedence over space, digit, punctuation, math, sign,
+letter, uppercase and lowercase
+</li>
+</ul>
+</li>
+<li>for <b>replacing</b> <i>dots</i> with <i>character</i> during backward
+translation if they're part of a number (<a href="#numsign"><code>numsign</code></a>)
+<ul class="org-ul">
+<li>has precedence over space, digit, punctuation, math, sign,
+letter, uppercase and lowercase
+</li>
+</ul>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as "literary digit"
+<ul class="org-ul">
+<li>for using <code>$D</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+<li>for joining a word with a literary digit (<a href="#joinword"><code>joinword</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">letter</span> <span class="org-string">a</span> <span class="org-constant">1</span>
+<span class="org-keyword">litdigit</span> <span class="org-string">1</span> <span class="org-constant">1</span>
+<span class="org-keyword">sign</span> <span class="org-comment"># 3456</span>
+<span class="org-keyword">numsign</span> <span class="org-constant">3456</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span class="org-comment-delimiter">/* </span><span class="org-comment">TODO: backward translation */</span>
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"#a"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"1"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"a"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"a"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/compileTranslationTable.c#L1128"><code>compileTranslationTable.c::1128</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/compileTranslationTable.c#L1185"><code>compileTranslationTable.c::1185</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_backtranslateString.c#L568"><code>lou_backtranslateString.c::568</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_backtranslateString.c#L627"><code>lou_backtranslateString.c::627</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sign" class="outline-3">
+<h3 id="sign"><a id="sec-1-9" name="sec-1-9"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-sign"><code>sign</code></a></h3>
+<div class="outline-text-3" id="text-sign">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as "sign (without special meaning)"
+<ul class="org-ul">
+<li>for using <code>$S</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-math" class="outline-3">
+<h3 id="math"><a id="sec-1-10" name="sec-1-10"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-math"><code>math</code></a></h3>
+<div class="outline-text-3" id="text-math">
+<ul class="org-ul">
+<li><b>associates</b> <i>character</i> with <i>dots</i>
+<ul class="org-ul">
+<li>for <b>replacing</b> <i>character</i> with <i>dots</i>
+</li>
+<li>for mapping <i>dots</i> to <i>character</i> in display phase if <i>dots</i> is
+a single-cell dot pattern
+</li>
+</ul>
+</li>
+<li><b>defines</b> <i>character</i> (and <i>dots</i> if single-cell) as "mathematical symbol"
+<ul class="org-ul">
+<li>for using <code>$m</code> wildcard in multipass scripts (<a href="#correct"><code>correct</code></a>,
+       <a href="#context"><code>context</code></a>, <a href="#pass2"><code>pass2</code></a>, <a href="#pass3"><code>pass3</code></a>, <a href="#pass4"><code>pass4</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-capsign" class="outline-3">
+<h3 id="capsign"><a id="sec-1-11" name="sec-1-11"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-capsign"><code>capsign</code></a></h3>
+<div class="outline-text-3" id="text-capsign">
+<ul class="org-ul">
+<li><b>defines</b> <i>dots</i> as "capital sign"
+<ul class="org-ul">
+<li>for inserting before a single uppercase letter (<a href="#uppercase"><code>uppercase</code></a>)
+<div class="matchcond">
+<p>
+lookbehind != uppercase &amp;&amp; lookahead = ( uppercase !uppercase )
+</p>
+
+</div>
+</li>
+<li>for inserting before each uppercase letter if <code>begcaps</code> is not defined (<a href="#begcaps"><code>begcaps</code></a>)
+<div class="matchcond">
+<p>
+lookahead = uppercase
+</p>
+
+</div>
+</li>
+<li>for turning uppercase letters into their lowercase counterparts (<a href="#uplow"><code>uplow</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">uplow</span> <span class="org-string">Ff</span> <span class="org-constant">1247,124</span>
+<span class="org-keyword">lowercase</span> <span class="org-string">o</span> <span class="org-constant">135</span>
+<span class="org-keyword">uppercase</span> <span class="org-string">O</span> <span class="org-constant">1357</span>
+<span class="org-keyword">uplow</span> <span class="org-string">Uu</span> <span class="org-constant">1367,136</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">,</span> <span class="org-constant">6</span>
+<span class="org-keyword">capsign</span> <span class="org-constant">6</span>
+<span class="org-keyword">always</span> <span class="org-string">uu</span> <span class="org-constant">1367</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"Foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">",foo"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"FOO"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">",f,O,O"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"Fuu"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">",fU"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"FUU"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">",f,U"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"FuU"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">",fu,u"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"FUu"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">",f,U"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L697"><code>lou_translateString.c::697</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1075"><code>lou_translateString.c::1075</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1823"><code>lou_translateString.c::1823</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1918"><code>lou_translateString.c::1918</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-begcaps" class="outline-3">
+<h3 id="begcaps"><a id="sec-1-12" name="sec-1-12"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-begcaps"><code>begcaps</code></a></h3>
+<div class="outline-text-3" id="text-begcaps">
+<ul class="org-ul">
+<li><b>defines</b> <i>dots</i> as sign that announces a block of uppercase letters (<a href="#uppercase"><code>uppercase</code></a>)
+<div class="matchcond">
+<p>
+lookbehind != uppercase &amp;&amp; lookahead = ( uppercase uppercase )
+</p>
+
+</div>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1051"><code>lou_translateString.c::1051</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-endcaps" class="outline-3">
+<h3 id="endcaps"><a id="sec-1-13" name="sec-1-13"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-endcaps"><code>endcaps</code></a></h3>
+<div class="outline-text-3" id="text-endcaps">
+<ul class="org-ul">
+<li><b>defines</b> <i>dots</i> as sign that closes a block of uppercase
+letters within a word (<a href="#uppercase"><code>uppercase</code></a>, <a href="#lowercase"><code>lowercase</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( uppercase uppercase ) &amp;&amp; lookahead = lowercase
+</p>
+
+</div>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">letter</span> <span class="org-string">f</span> <span class="org-constant">124</span>
+<span class="org-keyword">uplow</span> <span class="org-string">Oo</span> <span class="org-constant">135</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">,</span> <span class="org-constant">6</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">'</span> <span class="org-constant">3</span>
+<span class="org-keyword">begcaps</span> <span class="org-constant">6-6</span>
+<span class="org-keyword">endcaps</span> <span class="org-constant">6-3</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foo"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"fOO"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"f,,oo"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"fOOo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"f,,oo,'o"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1063"><code>lou_translateString.c::1063</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-letsign" class="outline-3">
+<h3 id="letsign"><a id="sec-1-14" name="sec-1-14"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-letsign"><code>letsign</code></a></h3>
+<div class="outline-text-3" id="text-letsign">
+<ul class="org-ul">
+<li><b>defines</b> <i>dots</i> as "letter sign"
+<ul class="org-ul">
+<li>for inserting before a one-letter word
+</li>
+<li>for inserting between a digit and a letter, except in case of <code>endnum</code> (<a href="#letter"><code>letter</code></a>, <a href="#digit"><code>digit</code></a>, <a href="#endnum"><code>endnum</code></a>)
+</li>
+<li>for inserting before a word that is also a contraction (<a href="#contraction"><code>contraction</code></a>)
+</li>
+</ul>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">letter</span> <span class="org-string">f</span> <span class="org-constant">124</span>
+<span class="org-keyword">letter</span> <span class="org-string">o</span> <span class="org-constant">135</span>
+<span class="org-keyword">digit</span> <span class="org-string">0</span> <span class="org-constant">356</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">;</span> <span class="org-constant">56</span>
+<span class="org-keyword">letsign</span> <span class="org-constant">56</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"f"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">";f"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foo"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"0foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"0;foo"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1009"><code>lou_translateString.c::1009</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1871"><code>lou_translateString.c::1871</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-noletsign" class="outline-3">
+<h3 id="noletsign"><a id="sec-1-15" name="sec-1-15"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-noletsign"><code>noletsign</code></a></h3>
+<div class="outline-text-3" id="text-noletsign">
+<ul class="org-ul">
+<li><b>inhibits</b> the use of a letter sign when any of <i>characters</i>
+occur as a one-letter word or after a digit
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">letter</span> <span class="org-string">f</span> <span class="org-constant">124</span>
+<span class="org-keyword">letter</span> <span class="org-string">o</span> <span class="org-constant">135</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">;</span> <span class="org-constant">56</span>
+<span class="org-keyword">letsign</span> <span class="org-constant">56</span>
+<span class="org-keyword">contraction</span> <span class="org-constant">foo</span>
+<span class="org-constant">noletsign</span><span class="org-comment"> f</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"f"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"f"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">";foo"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1035"><code>lou_translateString.c::1035</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-noletsignbefore" class="outline-3">
+<h3 id="noletsignbefore"><a id="sec-1-16" name="sec-1-16"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-noletsignbefore"><code>noletsignbefore</code></a></h3>
+<div class="outline-text-3" id="text-noletsignbefore">
+<ul class="org-ul">
+<li><b>inhibits</b> the use of a letter sign when any of <i>characters</i>
+preceed a one-letter word
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1028"><code>lou_translateString.c::1028</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-noletsignafter" class="outline-3">
+<h3 id="noletsignafter"><a id="sec-1-17" name="sec-1-17"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-noletsignafter"><code>noletsignafter</code></a></h3>
+<div class="outline-text-3" id="text-noletsignafter">
+<ul class="org-ul">
+<li><b>inhibits</b> the use of a letter sign when any of <i>characters</i>
+follow a one-letter word
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">letter</span> <span class="org-string">f</span> <span class="org-constant">124</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">;</span> <span class="org-constant">56</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">(</span> <span class="org-constant">12356</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">)</span> <span class="org-constant">23456</span>
+<span class="org-keyword">letsign</span> <span class="org-constant">56</span>
+<span class="org-keyword">noletsignbefore</span> <span class="org-constant">(</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"f"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">";f"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"(f"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"(f"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"f)"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">";f)"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1041"><code>lou_translateString.c::1041</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-numsign" class="outline-3">
+<h3 id="numsign"><a id="sec-1-18" name="sec-1-18"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-numsign"><code>numsign</code></a></h3>
+<div class="outline-text-3" id="text-numsign">
+<ul class="org-ul">
+<li><b>defines</b> <i>dots</i> as "number sign"
+<ul class="org-ul">
+<li>for inserting before a number, i.e. a sequence of <code>digit</code>, <code>decpoint</code> and <code>midnum</code> (<a href="#digit"><code>digit</code></a>, <a href="#decpoint"><code>decpoint</code></a>, <a href="#midnum"><code>midnum</code></a>)
+</li>
+<li>for finding numbers during backward translation
+</li>
+</ul>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">digit</span> <span class="org-string">0</span> <span class="org-constant">356</span>
+<span class="org-keyword">sign</span> <span class="org-comment"># 3456</span>
+<span class="org-keyword">numsign</span> <span class="org-constant">3456</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"0"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"#0"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L995"><code>lou_translateString.c::995</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1885"><code>lou_translateString.c::1885</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_backTranslateString.c#L1061"><code>lou_backTranslateString.c::1061</code></a>
+</li>
+</ul>
+
+</div>
+<div class="org-src-container">
+
+<pre class="src src-liblouis" id="chardefs.cti"><span class="org-keyword">space</span> <span class="org-string">\s</span> <span class="org-constant">0</span>
+<span class="org-keyword">letter</span> <span class="org-string">a</span> <span class="org-constant">1</span>
+<span class="org-keyword">letter</span> <span class="org-string">b</span> <span class="org-constant">12</span>
+<span class="org-keyword">letter</span> <span class="org-string">c</span> <span class="org-constant">14</span>
+<span class="org-keyword">letter</span> <span class="org-string">d</span> <span class="org-constant">145</span>
+<span class="org-keyword">letter</span> <span class="org-string">f</span> <span class="org-constant">124</span>
+<span class="org-keyword">letter</span> <span class="org-string">l</span> <span class="org-constant">123</span>
+<span class="org-keyword">letter</span> <span class="org-string">o</span> <span class="org-constant">135</span>
+<span class="org-keyword">letter</span> <span class="org-string">r</span> <span class="org-constant">1235</span>
+<span class="org-keyword">letter</span> <span class="org-string">u</span> <span class="org-constant">136</span>
+<span class="org-keyword">letter</span> <span class="org-string">z</span> <span class="org-constant">1356</span>
+<span class="org-keyword">digit</span> <span class="org-string">0</span> <span class="org-constant">356</span>
+<span class="org-keyword">digit</span> <span class="org-string">1</span> <span class="org-constant">2</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">.</span> <span class="org-constant">256</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">-</span> <span class="org-constant">36</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">;</span> <span class="org-constant">56</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-compbrl" class="outline-3">
+<h3 id="compbrl"><a id="sec-1-19" name="sec-1-19"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-compbrl"><code>compbrl</code></a></h3>
+<div class="outline-text-3" id="text-compbrl">
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1603"><code>lou_translateString.c::1603</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1630"><code>lou_translateString.c::1630</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1650"><code>lou_translateString.c::1650</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-comp6" class="outline-3">
+<h3 id="comp6"><a id="sec-1-20" name="sec-1-20"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-comp6"><code>comp6</code></a></h3>
+<div class="outline-text-3" id="text-comp6">
+</div>
+</div>
+
+<div id="outline-container-nocont" class="outline-3">
+<h3 id="nocont"><a id="sec-1-21" name="sec-1-21"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-nocont"><code>nocont</code></a></h3>
+<div class="outline-text-3" id="text-nocont">
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1695"><code>lou_translateString.c::1695</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1896"><code>lou_translateString.c::1896</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-replace" class="outline-3">
+<h3 id="replace"><a id="sec-1-22" name="sec-1-22"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-replace"><code>replace</code></a></h3>
+<div class="outline-text-3" id="text-replace">
+<ul class="org-ul">
+<li>bug?
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1907"><code>lou_translateString.c::1907</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-always" class="outline-3">
+<h3 id="always"><a id="sec-1-23" name="sec-1-23"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-always"><code>always</code></a></h3>
+<div class="outline-text-3" id="text-always">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">always</span> <span class="org-string">bar</span> <span class="org-constant">1356</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"bar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"z"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fooz"</span>
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-begmidword" class="outline-3">
+<h3 id="begmidword"><a id="sec-1-24" name="sec-1-24"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-begmidword"><code>begmidword</code></a></h3>
+<div class="outline-text-3" id="text-begmidword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are either at the beginning or in the middle of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | puntuation | letter ) &amp;&amp; lookahead = letter
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1446"><code>lou_translateString.c::1446</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-begnum" class="outline-3">
+<h3 id="begnum"><a id="sec-1-25" name="sec-1-25"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-begnum"><code>begnum</code></a></h3>
+<div class="outline-text-3" id="text-begnum">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are at the beginning of a number (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#digit"><code>digit</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | punctuation ) &amp;&amp; lookahead = digit
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1476"><code>lou_translateString.c::1476</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-begword" class="outline-3">
+<h3 id="begword"><a id="sec-1-26" name="sec-1-26"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-begword"><code>begword</code></a></h3>
+<div class="outline-text-3" id="text-begword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are at the beginning of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | puntuation ) &amp;&amp; lookahead = letter
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1439"><code>lou_translateString.c::1439</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-contraction" class="outline-3">
+<h3 id="contraction"><a id="sec-1-27" name="sec-1-27"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-contraction"><code>contraction</code></a></h3>
+<div class="outline-text-3" id="text-contraction">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | punctuation ) &amp;&amp; lookahead = ( space | punctuation )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> each matched character with its associated dot patterns
+</li>
+<li><b>inserts</b> letter sign before word (<a href="#letsign"><code>letsign</code></a>)
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">letsign</span> <span class="org-constant">56</span>
+<span class="org-keyword">word</span> <span class="org-string">could</span> <span class="org-constant">14-145</span><span class="org-comment"> </span>
+<span class="org-keyword">contraction</span> <span class="org-constant">cd</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"could"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"cd"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"cd"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">";cd"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1016"><code>lou_translateString.c::1016</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1373"><code>lou_translateString.c::1373</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-endnum" class="outline-3">
+<h3 id="endnum"><a id="sec-1-28" name="sec-1-28"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-endnum"><code>endnum</code></a></h3>
+<div class="outline-text-3" id="text-endnum">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are at the end of a number (<a href="#digit"><code>digit</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = digit
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+<li><b>inhibits</b> the use of a letter sign (<a href="#letsign"><code>letsign</code></a>)
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">letter</span> <span class="org-string">t</span> <span class="org-constant">2345</span>
+<span class="org-keyword">letter</span> <span class="org-string">h</span> <span class="org-constant">125</span>
+<span class="org-keyword">letter</span> <span class="org-string">s</span> <span class="org-constant">234</span>
+<span class="org-keyword">digit</span> <span class="org-string">5</span> <span class="org-constant">15</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">?</span> <span class="org-constant">1456</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">;</span> <span class="org-constant">56</span>
+<span class="org-keyword">letsign</span> <span class="org-constant">56</span>
+<span class="org-keyword">endnum</span> <span class="org-string">th</span> <span class="org-constant">1456</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"th"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"th"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"5th"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"5?"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"5ths"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"5?s"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"5t"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"5;t"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1487"><code>lou_translateString.c::1487</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1870"><code>lou_translateString.c::1870</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-endword" class="outline-3">
+<h3 id="endword"><a id="sec-1-29" name="sec-1-29"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-endword"><code>endword</code></a></h3>
+<div class="outline-text-3" id="text-endword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are at the end of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = letter &amp;&amp; lookahead = ( space | punctuation )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">endword</span> <span class="org-string">oo</span> <span class="org-constant">136</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo "</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu "</span>
+},
+{
+ <span class="org-string">"input"</span>: <span class="org-string">"foo."</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu."</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foobar"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1469"><code>lou_translateString.c::1469</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-joinnum" class="outline-3">
+<h3 id="joinnum"><a id="sec-1-30" name="sec-1-30"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-joinnum"><code>joinnum</code></a></h3>
+<div class="outline-text-3" id="text-joinnum">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are a word and a space and a digit follow (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#digit"><code>digit</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | puntuation ) &amp;&amp; lookahead = ( space+ digit )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+<li><b>drops</b> space between characters and digit
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">joinnum</span> <span class="org-string">foo</span> <span class="org-constant">124</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foo"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo 0"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"f0"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1385"><code>lou_translateString.c::1385</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L2022"><code>lou_translateString.c::2022</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-joinword" class="outline-3">
+<h3 id="joinword"><a id="sec-1-31" name="sec-1-31"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-joinword"><code>joinword</code></a></h3>
+<div class="outline-text-3" id="text-joinword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are a word and a space and a letter follow (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>, <a href="#litdigit"><code>litdigit</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | punctuation ) &amp;&amp; lookahead = ( space+ ( letter | litdigit ) )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+<li><b>drops</b> space between characters and following letter
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">joinword</span> <span class="org-string">foo</span> <span class="org-constant">124</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foo"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo   bar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fbar"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1416"><code>lou_translateString.c::1416</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L2023"><code>lou_translateString.c::2023</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-largesign" class="outline-3">
+<h3 id="largesign"><a id="sec-1-32" name="sec-1-32"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-largesign"><code>largesign</code></a></h3>
+<div class="outline-text-3" id="text-largesign">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+<li><b>drops</b> space between adjacent largesign words (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( ( space | punctuation ) largesign space+ ) &amp;&amp; lookahead != letter
+</p>
+
+</div>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">largesign</span> <span class="org-string">foo</span> <span class="org-constant">124</span>
+<span class="org-keyword">largesign</span> <span class="org-string">bar</span> <span class="org-constant">12</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fb"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo bar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fb"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo barr"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"f br"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1358"><code>lou_translateString.c::1358</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1879"><code>lou_translateString.c::1879</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-lowword" class="outline-3">
+<h3 id="lowword"><a id="sec-1-33" name="sec-1-33"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-lowword"><code>lowword</code></a></h3>
+<div class="outline-text-3" id="text-lowword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are a word preceded and followed by whitespace (<a href="#space"><code>space</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = space &amp;&amp; lookahead = space
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">lowword</span> <span class="org-string">foo</span> <span class="org-constant">124-136</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo "</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu "</span>
+},
+{
+ <span class="org-string">"input"</span>: <span class="org-string">"foo."</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foo."</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1408"><code>lou_translateString.c::1408</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-midendword" class="outline-3">
+<h3 id="midendword"><a id="sec-1-34" name="sec-1-34"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-midendword"><code>midendword</code></a></h3>
+<div class="outline-text-3" id="text-midendword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are either in the middle or at the end of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = letter &amp;&amp; lookahead = ( space | punctuation | letter )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1461"><code>lou_translateString.c::1461</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-midnum" class="outline-3">
+<h3 id="midnum"><a id="sec-1-35" name="sec-1-35"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-midnum"><code>midnum</code></a></h3>
+<div class="outline-text-3" id="text-midnum">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are in the middle of a number (<a href="#digit"><code>digit</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = digit &amp;&amp; lookahead = digit
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">digit</span> <span class="org-string">0</span> <span class="org-constant">245</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">.</span> <span class="org-constant">256</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">,</span> <span class="org-constant">6</span>
+<span class="org-keyword">sign</span> <span class="org-comment"># 3456</span>
+<span class="org-keyword">numsign</span> <span class="org-constant">3456</span>
+<span class="org-keyword">midnum</span> <span class="org-string">,</span> <span class="org-constant">256</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"0,0"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"#0.0"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"0.0"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"#0.#0"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L995"><code>lou_translateString.c::995</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1481"><code>lou_translateString.c::1481</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-midword" class="outline-3">
+<h3 id="midword"><a id="sec-1-36" name="sec-1-36"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-midword"><code>midword</code></a></h3>
+<div class="outline-text-3" id="text-midword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are in the middle of a word (<a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = letter &amp;&amp; lookahead = letter
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1454"><code>lou_translateString.c::1454</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-nocross" class="outline-3">
+<h3 id="nocross"><a id="sec-1-37" name="sec-1-37"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-nocross"><code>nocross</code></a></h3>
+<div class="outline-text-3" id="text-nocross">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they do not cross syllable boundaries
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-libhyphen" id="hyph.dic">foo1bar
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">include</span> <span class="org-variable-name">hyph.dic</span>
+<span class="org-keyword">nocross</span> <span class="org-string">foob</span> <span class="org-constant">124-136-12</span>
+<span class="org-keyword">nocross</span> <span class="org-string">bar</span> <span class="org-constant">12</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foob"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L481"><code>lou_translateString.c::481</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-partword" class="outline-3">
+<h3 id="partword"><a id="sec-1-38" name="sec-1-38"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-partword"><code>partword</code></a></h3>
+<div class="outline-text-3" id="text-partword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are part of a word but not the whole word (<a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = letter || lookahead = letter
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">partword</span> <span class="org-string">oo</span> <span class="org-constant">136</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"oo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"oo"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fubar"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1378"><code>lou_translateString.c::1378</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-postpunc" class="outline-3">
+<h3 id="postpunc"><a id="sec-1-39" name="sec-1-39"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-postpunc"><code>postpunc</code></a></h3>
+<div class="outline-text-3" id="text-postpunc">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are part of punctuation at the end of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>, <a href="#digit"><code>digit</code></a>)
+<div class="matchcond">
+<p>
+characters(1) = punctuation &amp;&amp; lookbehind = ( ( letter | digit ) ( !space )* ) &amp;&amp; lookahead != letter
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">letter</span> <span class="org-string">f</span> <span class="org-constant">124</span>
+<span class="org-keyword">letter</span> <span class="org-string">o</span> <span class="org-constant">135</span>
+<span class="org-keyword">sign</span> <span class="org-string">&lt;</span> <span class="org-constant">126</span>
+<span class="org-keyword">sign</span> <span class="org-string">&gt;</span> <span class="org-constant">345</span>
+<span class="org-keyword">sign</span> <span class="org-comment"># 3456</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">'</span> <span class="org-constant">5</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">(</span> <span class="org-constant">12356</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">)</span> <span class="org-constant">23456</span>
+<span class="org-keyword">prepunc</span> <span class="org-string">(</span> <span class="org-constant">5-126</span>
+<span class="org-keyword">postpunc</span> <span class="org-string">)</span> <span class="org-constant">5-345</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"(foo)"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"'&lt;foo'&gt;"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"( foo )"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"( foo )"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"(#foo)"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"'&lt;#foo'&gt;"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"#(foo)"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"#'&lt;foo'&gt;"</span>
+}
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">prepunc</span> <span class="org-string">.foo</span> <span class="org-constant">124-136</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">".foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fubar"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1513"><code>lou_translateString.c::1513</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-prepunc" class="outline-3">
+<h3 id="prepunc"><a id="sec-1-40" name="sec-1-40"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-prepunc"><code>prepunc</code></a></h3>
+<div class="outline-text-3" id="text-prepunc">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are part of punctuation at the beginning of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>, <a href="#digit"><code>digit</code></a>)
+<div class="matchcond">
+<p>
+characters(1) = punctuation &amp;&amp; lookbehind != letter &amp;&amp; lookahead = ( ( !space )* ( letter | digit ) )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1498"><code>lou_translateString.c::1498</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-prfword" class="outline-3">
+<h3 id="prfword"><a id="sec-1-41" name="sec-1-41"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-prfword"><code>prfword</code></a></h3>
+<div class="outline-text-3" id="text-prfword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are either a word or at the end of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | puntuation | letter ) &amp;&amp; lookahead = ( space | punctuation )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1431"><code>lou_translateString.c::1431</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-repeated" class="outline-3">
+<h3 id="repeated"><a id="sec-1-42" name="sec-1-42"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-repeated"><code>repeated</code></a></h3>
+<div class="outline-text-3" id="text-repeated">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i> for first match
+<div class="matchcond">
+<p>
+lookbehind != repeated
+</p>
+
+</div>
+</li>
+<li><b>drops</b> characters for consecutive repetitions
+<div class="matchcond">
+<p>
+lookbehind = repeated
+</p>
+
+</div>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">punctuation</span> <span class="org-string">-</span> <span class="org-constant">36</span>
+<span class="org-keyword">repeated</span> <span class="org-string">---</span> <span class="org-constant">36-36-36</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"---"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"---"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"------"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"---"</span>
+},
+{
+ <span class="org-string">"input"</span>: <span class="org-string">"-------"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"----"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1963"><code>lou_translateString.c::1963</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-repword" class="outline-3">
+<h3 id="repword"><a id="sec-1-43" name="sec-1-43"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-repword"><code>repword</code></a></h3>
+<div class="outline-text-3" id="text-repword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when the word before it equals the word after it
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i> and <b>drops</b> word after it
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-warning">repword - 1356</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo-foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fooz"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo-foo-foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fooz"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1237"><code>lou_translateString.c::1237</code></a>
+</li>
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1992"><code>lou_translateString.c::1992</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sufword" class="outline-3">
+<h3 id="sufword"><a id="sec-1-44" name="sec-1-44"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-sufword"><code>sufword</code></a></h3>
+<div class="outline-text-3" id="text-sufword">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are either a word or at the beginning of a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>, <a href="#letter"><code>letter</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | puntuation ) &amp;&amp; lookahead = ( space | punctuation | letter )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1423"><code>lou_translateString.c::1423</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-syllable" class="outline-3">
+<h3 id="syllable"><a id="sec-1-45" name="sec-1-45"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-syllable"><code>syllable</code></a></h3>
+<div class="outline-text-3" id="text-syllable">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+<li><b>inhibits</b> other contractions across boundaries either from left or right
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">syllable</span> <span class="org-string">bar</span> <span class="org-constant">=</span>
+<span class="org-keyword">always</span> <span class="org-string">foob</span> <span class="org-constant">124-136-12</span>
+<span class="org-keyword">always</span> <span class="org-string">foobar</span> <span class="org-constant">124-12</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"fooba"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fuba"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foobar"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1716"><code>lou_translateString.c::1716</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-word" class="outline-3">
+<h3 id="word"><a id="sec-1-46" name="sec-1-46"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-word"><code>word</code></a></h3>
+<div class="outline-text-3" id="text-word">
+<ul class="org-ul">
+<li><b>matches</b> <i>characters</i> when they are a word (<a href="#space"><code>space</code></a>, <a href="#punctuation"><code>punctuation</code></a>)
+<div class="matchcond">
+<p>
+lookbehind = ( space | puntuation ) &amp;&amp; lookahead = ( space | punctuation )
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">include</span> <span class="org-variable-name">chardefs.cti</span>
+<span class="org-keyword">word</span> <span class="org-string">foo</span> <span class="org-constant">124-136</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foo."</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"fu."</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"foobar"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"foobar"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1370"><code>lou_translateString.c::1370</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-decpoint" class="outline-3">
+<h3 id="decpoint"><a id="sec-1-47" name="sec-1-47"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-decpoint"><code>decpoint</code></a></h3>
+<div class="outline-text-3" id="text-decpoint">
+<ul class="org-ul">
+<li><b>matches</b> when <i>character</i> preceeds a digit (<a href="#digit"><code>digit</code></a>)
+<div class="matchcond">
+<p>
+lookahead = digit
+</p>
+
+</div>
+</li>
+<li><b>replaces</b> matched characters with <i>dots</i>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-liblouis"><span class="org-keyword">digit</span> <span class="org-string">0</span> <span class="org-constant">245</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">.</span> <span class="org-constant">46</span>
+<span class="org-keyword">punctuation</span> <span class="org-string">;</span> <span class="org-constant">56</span>
+<span class="org-keyword">sign</span> <span class="org-comment"># 3456</span>
+<span class="org-keyword">numsign</span> <span class="org-constant">3456</span>
+<span class="org-keyword">decpoint</span> <span class="org-string">.</span> <span class="org-constant">46</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-javascript">{
+  <span class="org-string">"input"</span>: <span class="org-string">".0"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"#.0"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">"0.0"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">"#0.0"</span>
+},
+{
+  <span class="org-string">"input"</span>: <span class="org-string">";0"</span>,
+  <span class="org-string">"output"</span>: <span class="org-string">";#0"</span>
+}
+</pre>
+</div>
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1492"><code>lou_translateString.c::1492</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-context" class="outline-3">
+<h3 id="context"><a id="sec-1-48" name="sec-1-48"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-context"><code>context</code></a></h3>
+<div class="outline-text-3" id="text-context">
+<ul class="org-ul">
+<li><b>matches</b> characters expressed by <i>test</i>
+</li>
+<li><b>replaces</b> matched characters with dot patterns expressed by <i>action</i>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-pass2" class="outline-3">
+<h3 id="pass2"><a id="sec-1-49" name="sec-1-49"></a><a href="#pass2"><code>pass2</code></a></h3>
+<div class="outline-text-3" id="text-pass2">
+<ul class="org-ul">
+<li>considered in the second pass only
+</li>
+<li><b>matches</b> dot patterns expressed by <i>test</i>
+</li>
+<li><b>replaces</b> matched characters with dot patterns expressed by <i>action</i>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-pass3" class="outline-3">
+<h3 id="pass3"><a id="sec-1-50" name="sec-1-50"></a><a href="#pass3"><code>pass3</code></a></h3>
+<div class="outline-text-3" id="text-pass3">
+<ul class="org-ul">
+<li>considered in the third pass only
+</li>
+<li><b>matches</b> dot patterns expressed by <i>test</i>
+</li>
+<li><b>replaces</b> matched characters with dot patterns expressed by <i>action</i>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-pass4" class="outline-3">
+<h3 id="pass4"><a id="sec-1-51" name="sec-1-51"></a><a href="#pass4"><code>pass4</code></a></h3>
+<div class="outline-text-3" id="text-pass4">
+<ul class="org-ul">
+<li>considered in the fourth pass only
+</li>
+<li><b>matches</b> dot patterns expressed by <i>test</i>
+</li>
+<li><b>replaces</b> matched characters with dot patterns expressed by <i>action</i>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-correct" class="outline-3">
+<h3 id="correct"><a id="sec-1-52" name="sec-1-52"></a><a href="http://www.liblouis.org/documentation/liblouis.html#index-correct"><code>correct</code></a></h3>
+<div class="outline-text-3" id="text-correct">
+<ul class="org-ul">
+<li>considered in the corrections phase only
+</li>
+<li><b>matches</b> characters expressed by <i>test</i>
+</li>
+<li><b>replaces</b> matched characters with characters expressed by <i>action</i>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-display" class="outline-3">
+<h3 id="display"><a id="sec-1-53" name="sec-1-53"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-display"><code>display</code></a></h3>
+<div class="outline-text-3" id="text-display">
+</div>
+</div>
+
+<div id="outline-container-hyphen" class="outline-3">
+<h3 id="hyphen"><a id="sec-1-54" name="sec-1-54"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-hyphen"><code>hyphen</code></a></h3>
+<div class="outline-text-3" id="text-hyphen">
+</div>
+</div>
+
+<div id="outline-container-undefined" class="outline-3">
+<h3 id="undefined"><a id="sec-1-55" name="sec-1-55"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-undefined"><code>undefined</code></a></h3>
+<div class="outline-text-3" id="text-undefined">
+<div class="coderefs">
+<ul class="org-ul">
+<li><a href="https://github.com/liblouis/liblouis/blob/1e1e7587cfbc263b351644e52fdaf2684103d6c8/liblouis/lou_translateString.c#L1913"><code>lou_translateString.c::1913</code></a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-class" class="outline-3">
+<h3 id="class"><a id="sec-1-56" name="sec-1-56"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-class"><code>class</code></a></h3>
+<div class="outline-text-3" id="text-class">
+</div>
+</div>
+
+<div id="outline-container-before" class="outline-3">
+<h3 id="before"><a id="sec-1-57" name="sec-1-57"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-before"><code>before</code></a></h3>
+<div class="outline-text-3" id="text-before">
+</div>
+</div>
+
+<div id="outline-container-after" class="outline-3">
+<h3 id="after"><a id="sec-1-58" name="sec-1-58"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-after"><code>after</code></a></h3>
+<div class="outline-text-3" id="text-after">
+</div>
+</div>
+
+<div id="outline-container-grouping" class="outline-3">
+<h3 id="grouping"><a id="sec-1-59" name="sec-1-59"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-grouping"><code>grouping</code></a></h3>
+<div class="outline-text-3" id="text-grouping">
+</div>
+</div>
+
+<div id="outline-container-swapcd" class="outline-3">
+<h3 id="swapcd"><a id="sec-1-60" name="sec-1-60"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-swapcd"><code>swapcd</code></a></h3>
+<div class="outline-text-3" id="text-swapcd">
+</div>
+</div>
+
+<div id="outline-container-swapdd" class="outline-3">
+<h3 id="swapdd"><a id="sec-1-61" name="sec-1-61"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-swapdd"><code>swapdd</code></a></h3>
+<div class="outline-text-3" id="text-swapdd">
+</div>
+</div>
+
+<div id="outline-container-swapcc" class="outline-3">
+<h3 id="swapcc"><a id="sec-1-62" name="sec-1-62"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-swapcc"><code>swapcc</code></a></h3>
+<div class="outline-text-3" id="text-swapcc">
+</div>
+</div>
+
+<div id="outline-container-exactdots" class="outline-3">
+<h3 id="exactdots"><a id="sec-1-63" name="sec-1-63"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-exactdots"><code>exactdots</code></a></h3>
+<div class="outline-text-3" id="text-exactdots">
+</div>
+</div>
+
+<div id="outline-container-nofor" class="outline-3">
+<h3 id="nofor"><a id="sec-1-64" name="sec-1-64"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-nofor"><code>nofor</code></a></h3>
+<div class="outline-text-3" id="text-nofor">
+</div>
+</div>
+
+<div id="outline-container-noback" class="outline-3">
+<h3 id="noback"><a id="sec-1-65" name="sec-1-65"></a><span class="todo TODO">TODO</span> <a href="http://www.liblouis.org/documentation/liblouis.html#index-noback"><code>noback</code></a></h3>
+<div class="outline-text-3" id="text-noback">
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Appendix I: Translation algorithm in pseudo-code</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-clojure">(<span class="org-keyword">def</span> <span class="org-function-name">table</span> (compile-table))
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">translate</span> [input typeform]
+  <span class="org-string">""</span>
+  {<span class="org-constant">:pre</span> [(<span class="org-builtin">=</span> (<span class="org-builtin">count</span> input) (<span class="org-builtin">count</span> typeform))]}
+  (<span class="org-keyword">let</span> [<span class="org-comment-delimiter">;; </span><span class="org-comment">pass 0</span>
+        tmp (make-corrections input)
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">pass 1</span>
+        syl-info (mark-syllables tmp1)
+        cap-info (mark-capitals tmp1)
+        tmp (<span class="org-keyword">loop</span> [pos 0
+                   tmp2 []
+                   prev-rules []
+                   emph-info []]
+              (<span class="org-keyword">if</span> (<span class="org-builtin">&gt;=</span> pos (<span class="org-builtin">count</span> tmp))
+                tmp2
+                (<span class="org-keyword">if-let</span> [[pos tmp2] (maybe-translate-comp-braille tmp typeform pos tmp2)]
+                  (<span class="org-keyword">recur</span> pos tmp2 prev-rules emph-info)
+                  (<span class="org-keyword">let</span> [[tmp2 emph-info] (maybe-insert-emph-indicator tmp typeform emph-info pos tmp2)
+                        rule (select-rule tmp syl-info cap-info pos prev-rules)]
+                    (<span class="org-keyword">if</span> (<span class="org-builtin">=</span> (rule-type rule) <span class="org-constant">:compbrl</span>)
+                      (<span class="org-keyword">let</span> [[pos tmp2] (do-compbrl tmp pos tmp2)]
+                        (<span class="org-keyword">recur</span> pos tmp2 prev-rules emph-info))
+                      (<span class="org-keyword">let</span> [tmp2 (<span class="org-keyword">or</span> (maybe-insert-num-indicator tmp pos rule prev-rules tmp2)
+                                     (maybe-insert-let-indicator tmp pos rule tmp2)
+                                     (maybe-insert-cap-indicator tmp pos tmp2)
+                                     tmp2)
+                            tmp2 (<span class="org-keyword">if</span> (<span class="org-builtin">=</span> (rule-type rule) <span class="org-constant">:largesign</span>)
+                                   (trim-trailing-space tmp2)
+                                   tmp2)]
+                        (<span class="org-keyword">let</span> [[pos tmp2] (do-translation tmp pos rule tmp2)
+                              prev-rules (<span class="org-builtin">conj</span> prev-rules rule)]
+                          (<span class="org-keyword">recur</span> pos tmp2 prev-rules emph-info))))))))
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">pass 2 to 4</span>
+        tmp (<span class="org-keyword">loop</span> [n 2
+                   tmp tmp]
+              (<span class="org-keyword">if</span> (<span class="org-builtin">&gt;</span> n 4)
+                tmp
+                (<span class="org-keyword">recur</span> (+1 n)
+                       (<span class="org-keyword">loop</span> [pos 0
+                              tmp2 []]
+                         (<span class="org-keyword">if</span> (<span class="org-builtin">&gt;=</span> pos (<span class="org-builtin">count</span> tmp))
+                           tmp2
+                           (<span class="org-keyword">if-let</span> [rule (select-multipass-rule tmp pos n)]
+                             (<span class="org-keyword">let</span> [[pos tmp2] (do-translation tmp pos rule tmp2)]
+                               (<span class="org-keyword">recur</span> pos tmp2))
+                             (<span class="org-keyword">let</span> [tmp2 (<span class="org-builtin">conj</span> tmp2 (tmp pos))
+                                   pos (+1 pos)]
+                               (<span class="org-keyword">recur</span> pos tmp2))))))))]
+    tmp))
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">make-corrections</span> [input]
+  <span class="org-string">"(See opcode correct.)"</span>)
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">mark-syllables</span> [input]
+  <span class="org-string">"(See opcode syllable.)"</span>)
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">mark-capitals</span> [input]
+  <span class="org-string">"(See opcode uplow.)"</span>)
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">maybe-translate-comp-braille</span> [input typeform pos output]
+  <span class="org-string">"Maybe translate part of the `input' starting at position `pos' as</span>
+<span class="org-string">computer braille, based on the `typeform' parameter. (See opcodes</span>
+<span class="org-string">begcomp and endcomp.)"</span>
+  {<span class="org-constant">:pre</span> [(<span class="org-builtin">=</span> (<span class="org-builtin">count</span> input) (<span class="org-builtin">count</span> typeform))
+         (<span class="org-builtin">&lt;</span> pos (<span class="org-builtin">count</span> input))]
+   <span class="org-constant">:post</span> [(<span class="org-keyword">if-let</span> [[new-pos new-output] %]
+            (<span class="org-keyword">and</span> (<span class="org-builtin">&gt;</span> new-pos pos)
+                 (only-appended? output new-output)
+                 (<span class="org-builtin">&gt;</span> (<span class="org-builtin">count</span> new-output) (<span class="org-builtin">count</span> output)))
+            true)]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">maybe-insert-emph-indicator</span> [input typeform emph-info pos output]
+  <span class="org-string">"Maybe insert an emphasis indicator based on the `typeform'</span>
+<span class="org-string">parameter at position `pos' and info `emph-info' from previous</span>
+<span class="org-string">iterations. Maybe mark positions in the input for future insertion of</span>
+<span class="org-string">emphasis indicators. (See opcodes singleletter__, firstletter__,</span>
+<span class="org-string">lastletter__, firstword__, lastword__before, lastword__after and</span>
+<span class="org-string">len__phrase.)"</span>
+  {<span class="org-constant">:pre</span> [(<span class="org-builtin">=</span> (<span class="org-builtin">count</span> input) (<span class="org-builtin">count</span> typeform))
+         (<span class="org-builtin">&lt;</span> pos (<span class="org-builtin">count</span> input))]
+   <span class="org-constant">:post</span> [(<span class="org-keyword">let</span> [[new-output new-emph-info] %]
+            (<span class="org-keyword">and</span> (only-appended? output new-output)
+                 (only-appended? emph-info new-emph-info)))]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">select-rule</span> [input syl-info cap-info pos prev-rules]
+  <span class="org-string">"Select a translation rule that matches the `input' at position</span>
+<span class="org-string">  `pos', based on info about syllable and capital positions, and a</span>
+<span class="org-string">  list of previously applied rules."</span>)
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">do-compbrl</span> [input pos output]
+  <span class="org-string">""</span>)
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">maybe-insert-num-indicator</span> [input pos rule prev-rules output]
+  <span class="org-string">""</span>
+  {<span class="org-constant">:post</span> [(<span class="org-keyword">if-let</span> [new-output %]
+            (<span class="org-keyword">and</span> (only-appended? output new-output)
+                 (<span class="org-builtin">&gt;</span> (<span class="org-builtin">count</span> new-output) (<span class="org-builtin">count</span> output)))
+            true)]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">maybe-insert-let-indicator</span> [input pos rule output]
+  <span class="org-string">""</span>
+  {<span class="org-constant">:post</span> [(<span class="org-keyword">if-let</span> [new-output %]
+            (<span class="org-keyword">and</span> (only-appended? output new-output)
+                 (<span class="org-builtin">&gt;</span> (<span class="org-builtin">count</span> new-output) (<span class="org-builtin">count</span> output)))
+            true)]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">maybe-insert-cap-indicator</span> [input pos output]
+  <span class="org-string">""</span>
+  {<span class="org-constant">:post</span> [(<span class="org-keyword">if-let</span> [new-output %]
+            (<span class="org-keyword">and</span> (only-appended? output new-output)
+                 (<span class="org-builtin">&gt;</span> (<span class="org-builtin">count</span> new-output) (<span class="org-builtin">count</span> output)))
+            true)]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">trim-trailing-space</span> [output]
+  <span class="org-string">"Trim trailing space characters from `output'."</span>
+  {<span class="org-constant">:post</span> [(<span class="org-builtin">=</span> % (<span class="org-builtin">take</span> (<span class="org-builtin">count</span> %) output))]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">do-translation</span> [input pos rule output]
+  <span class="org-string">"Apply the translation rule on `input' at position `pos'."</span>
+  {<span class="org-constant">:post</span> [(<span class="org-keyword">let</span> [[new-pos new-output] %]
+            (<span class="org-keyword">and</span> (<span class="org-builtin">&gt;</span> new-pos pos)
+                 (only-appended? output new-output)))]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">select-multipass-rule</span> [input pos n]
+  <span class="org-string">"Select a multipass translation rule for pass `n' that matches the</span>
+<span class="org-string">  `input' at position `pos'. (See opcodes pass2, pass3 and pass4)."</span>
+  {<span class="org-constant">:pre</span> [(#{2 3 4} n)]
+   <span class="org-constant">:post</span> [(<span class="org-keyword">if-let</span> [rule %]
+            (<span class="org-builtin">=</span> (rule-type %) (<span class="org-keyword">case</span> n
+                               2 <span class="org-constant">:pass2</span>
+                               3 <span class="org-constant">:pass3</span>
+                               4 <span class="org-constant">:pass4</span>))
+            true)]})
+
+(<span class="org-keyword">defn</span> <span class="org-function-name">only-appended?</span> [old new]
+  (<span class="org-builtin">=</span> old (<span class="org-builtin">take</span> (<span class="org-builtin">count</span> old) new)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

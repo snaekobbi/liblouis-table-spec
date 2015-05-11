@@ -1,0 +1,62 @@
+.org-keyword {
+	color: #568c00;
+}
+
+.org-string {
+	color: #2994a1;
+}
+
+.org-constant {
+	color: #ff6c1b;
+}
+
+.org-variable-name {
+	color: #dca000;
+}
+
+.org-comment {
+	color: #8e908c;
+	font-style: italic;
+}
+
+.org-comment-delimiter {
+	color: #8e908c;
+	font-style: italic;
+}
+
+.org-function-name {
+	color: #1d58d0;
+}
+
+.org-builtin {
+	color: #9030b0;
+}
+
+.src[id]::before {
+	display: block;
+	content: attr(id);
+}
+
+.src a {
+	color: inherit;
+}
+
+div.coderefs::before {
+	display: block;
+	content: "Relevant code";
+	color: white;
+	background-color: #888;
+	padding-left: 5px;
+}
+
+div.coderefs {
+	border: 1px solid #888;
+	margin: 1.2em;
+}
+
+div.matchcond > p {
+	display: inline-block;
+	border: 1px solid #888;
+	padding: 5px;
+	font-family: monospace;
+}
